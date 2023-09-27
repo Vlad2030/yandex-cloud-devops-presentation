@@ -5,5 +5,7 @@ chmod +x terraform
 cp terraform /usr/bin/
 echo 
 printf -- '-%.0s' {1..50}
+path=$(pwd)
+export PATH="$PATH:$path/terraform"
 echo
 echo "Terraform installed! Write ./terraform to use"
