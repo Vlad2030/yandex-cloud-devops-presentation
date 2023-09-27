@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  backend: 
+    build: ./backend-service
+    container_name: fastapi
+    command: bash start.sh
+    ports:
+      - 8000:8000
+    networks:
+      - app-network
+
+
+  webserver:
+    build: ./nginx
+    container_name: nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    name: app-network
+    driver: bridge
